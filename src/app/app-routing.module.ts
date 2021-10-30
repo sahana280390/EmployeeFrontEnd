@@ -4,8 +4,8 @@ import { EmployeeHomeComponent } from './employee/employee-home/employee-home.co
 
 
 const routes: Routes = [
-  { path: '',  redirectTo: 'employee', pathMatch: 'full' },
-  {path : 'employee', component: EmployeeHomeComponent},
+  { path: '',  redirectTo: 'employee-home', pathMatch: 'full' },
+  {path : 'employee-home', component: EmployeeHomeComponent},
   
 ];
 

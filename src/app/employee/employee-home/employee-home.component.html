@@ -1,4 +1,4 @@
-<div class="fluid-container">
+<!-- <div class="fluid-container">
   <div class="col-xs-12">
     <div class="top__header">
       <div class="page__title">
@@ -20,12 +20,21 @@
      
     </div>
   </div>
-</div>
+</div> -->
 <br>
-<div class="fluid-container" *ngIf="employeeList.length > 0">
+<div class="fluid-container">
   <div class="card_cstm">
 
-  <div class="card_body">
+    <div class="add_btn">
+      <button
+      mat-raised-button
+      color="primary"
+      (click)="addEmployee()">
+      Add Employee
+    </button>
+    </div>
+<br>
+  <div class="card_body" *ngIf="employeeList.length > 0">
 
   
   <table class="table table-hover table-sm table-bordered">
@@ -52,8 +61,8 @@
         <td>{{ employee.emailId }}</td>
         <td>{{ employee.phoneNumber }}</td>
         <td>{{ employee.salary | currency:'USD' }}  </td>
-        <td>{{ employee.hireDate }}</td>
-        <td>{{ employee.manager }}</td>
+        <td>{{ employee.hireDate | date: 'MM/dd/YYYY' }}</td>
+        <td>{{employee.manager}}</td>
         <td>{{ employee.department.departmentName }}</td>
         <td>
           <button
@@ -84,8 +93,8 @@
     <div class="col-xs-12">
       <mat-paginator
         #paginator
-        [pageSizeOptions]="[5, 10, 15]"
-        [pageSize]="5"
+        [pageSizeOptions]="[10, 15, 20]"
+        [pageSize]="pageSize"
         [length]="totalElements"
         (page)="nextPage($event)"
       >

@@ -21,29 +21,33 @@ export class EmployeeHomeComponent implements OnInit {
   departmentList: Department[]=[];
   loading: boolean;
   addEmployeeDataItem: Employee;
+  pageSize:any;
+ 
+  
 
   constructor(private employeeService: EmployeeService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.retrieveManagerList();
-    this.retrieveDepartmentList();
+    //this.retrieveDepartmentList();
   }
 
   retrieveManagerList() {
     this.employeeService.fetchManagerList().subscribe(data => {
       this.managerList = data;
-      //console.log('managerLIst',this.managerList);
+      this.retrieveDepartmentList()
+     
   })
 }
   retrieveDepartmentList(){
     this.employeeService.fetchDepartmentList().subscribe(data => {
       this.departmentList = data;
-     // console.log('department',this.departmentList);
+      this.retrieveEmployeeList();
     })
   }
 
   retrieveEmployeeList() {
-    this.fetchEmployees({ page: "0", size: "5" });
+    this.fetchEmployees({ page: "0", size: "10" });
   }
 
   private fetchEmployees(request) {
@@ -51,8 +55,10 @@ export class EmployeeHomeComponent implements OnInit {
     this.employeeService.fetchEmployeeList(request)
       .subscribe(data => {
         this.employeeList = data['content'];
+        this.employeeList = this.employeeList.sort((one, two) => (one.employeeId > two.employeeId ? -1 : 1));
         this.totalElements = data['totalElements'];
         this.loading = false;
+        this.pageSize=10;
       }, error => {
         this.loading = false;
       });
@@ -61,37 +67,41 @@ export class EmployeeHomeComponent implements OnInit {
   private deleteEmployee(employeeId) {
     this.employeeService.deleteEmployee(employeeId).subscribe(response => {
       //console.log(response);
-      this.fetchEmployees({ page: "0", size: "5" });
+      this.fetchEmployees({ page: "0", size: "10" });
     })
   }
 
   public addEmployee(){
-     /** Dialog modal called on the file exceeding limit error and on notification date being empty */
-  // this.addEmployeeDataItem = new Employee();
+
+    window.scroll(0, 0);
     const dialogRef = this.dialog.open(AddEditEmployeeComponent, {
-      width: '450px',
+      panelClass: 'AddEditEmployee__popup',
+      disableClose: true,
       data: {header:'Add Employee', content: new Employee()}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result.action === 'OK') {
-        this.fetchEmployees({ page: "0", size: "5" });
+        this.fetchEmployees({ page: "0", size: "10" });
       }     
 
     });
    
   }
 
+
   public editEmployee(editEmployeeDataItem){
+    window.scroll(0, 0);
    // console.log(editEmployeeDataItem);
     const dialogRef = this.dialog.open(AddEditEmployeeComponent, {
-      width: '430px',
+      panelClass: 'AddEditEmployee__popup',
+      disableClose: true,
       data: {header:'Edit Employee', content: editEmployeeDataItem}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result.action === 'OK') {
-        this.fetchEmployees({ page: "0", size: "5" });
+        this.fetchEmployees({ page: "0", size: "10" });
       }  
 
     });

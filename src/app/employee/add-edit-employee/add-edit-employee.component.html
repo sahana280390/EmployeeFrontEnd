@@ -23,13 +23,13 @@
               <mat-form-field  appearance="fill">
                 <mat-label>Email</mat-label>
                 <input matInput  [formControlName]="'emailId'" placeholder="abc@example.com" required>
-                <mat-error *ngIf="employeeForm.get('emailId').invalid">'Please enter a valid email'</mat-error>
+                <mat-error *ngIf="employeeForm.get('emailId').invalid">Please enter a valid email</mat-error>
               </mat-form-field>
 
               <mat-form-field appearance="fill">
                 <mat-label>Phone Number</mat-label>
                 <input matInput  [formControlName]="'phoneNumber'" placeholder="123-456-7890" required>
-               <mat-error *ngIf="employeeForm.get('phoneNumber').invalid">'Please enter a valid phone number'</mat-error>
+               <mat-error *ngIf="employeeForm.get('phoneNumber').invalid">Please enter a valid phone number</mat-error>
                </mat-form-field>
 
               <mat-form-field appearance="fill">
@@ -69,7 +69,7 @@
               </mat-form-field>
                 
         </div>
-       
+        {{employeeForm.get('department')}}
 
         <div class="button-cls">
           <button mat-raised-button color="primary" style="margin-left: 10px;"  (click)="onCancelClick()">Cancel</button>

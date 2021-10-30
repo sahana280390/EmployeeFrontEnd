@@ -58,27 +58,37 @@ export class AddEditEmployeeComponent implements OnInit {
       this.employeeForm.reset(this.data.content);
      }
     
-     console.log(this.employeeForm.value);
+    // console.log(this.employeeForm.value);
     })
   }
 
   onOKClick(): void {
-    console.log('hie',this.employeeForm.value);
+   // console.log('hie',this.employeeForm.value);
     this.employeeObj = this.employeeForm.value;
-    this.dialogRef.close({'action': 'OK'});
-    this.employeeService.saveEmployee(this.employeeObj).subscribe(response => {
-      console.log(response);
-    },err=> {
-     // console.log('error in the form',err.error.errors);
-      if(err.error && err.error.errors && err.error.errors != null){
-         const dialogRef = this.dialog.open(ErrorComponent, {
-        width: '430px',
-        data: {header:'Error while saving the Employee Data', content:err.error.errors }
-      });
-      } else {
-          this.notificationBar.open('Employee Data is not saved', 'Close');
-        }
-      });
+    if(this.employeeObj.department && this.employeeObj.department.departmentId != null) {
+      this.employeeService.saveEmployee(this.employeeObj).subscribe(response => {
+        this.notificationBar.open('Employee Data is saved successfully', 'Close');
+        this.dialogRef.close({'action': 'OK'});
+      },err=> {
+       // console.log('error in the form',err.error.errors);
+        if(err.error && err.error.errors && err.error.errors != null){
+           const dialogRef = this.dialog.open(ErrorComponent, {
+          width: '430px',
+          data: {header:'Error while saving the Employee Data', content:err.error.errors }
+        });
+        } else {
+            this.notificationBar.open('Employee Data is not saved', 'Close');
+          }
+        },()=>{
+        //  this.dialogRef.close({'action': 'OK'});
+        });
+      
+    } else {
+      this.notificationBar.open('Please select department', 'Close');
+    }
+    
+
+     
    
   }
 

@@ -73,6 +73,14 @@ margin-bottom: 0px !important;
 
 }
 
+/* Added for customising the popup width and height of the dialog window and tooltip*/
+.AddEditEmployee__popup {
+  min-width: 40vw !important;
+  max-width: 60vw !important;
+  min-height: 80vh !important;
+  max-height: 90vh !important;
+}
+
 .table td, .table th {
   padding: 0.45rem !important;
   }
