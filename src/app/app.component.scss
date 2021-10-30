@@ -1,0 +1,58 @@
+// Custom Navigation
+main {
+    // margin-left: 3.5rem;
+    margin-top: 42px;
+    padding: 10px;
+    background: #ecf0f6;
+    //height: 100%;
+    position: relative;
+  }
+
+
+  .top__navigation {
+    display: flex;
+    background: linear-gradient(90deg, #3F51B5 0%, rgba(0, 108, 226, 0.7) 53.56%, #28378a 100%) !important;
+    color: #fff !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 3px -2px rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
+    z-index: 9999;
+    width: 100% !important;
+    height: 42px;
+    .logo-title {
+      .logo-link {
+        display: flex;
+        align-items: center;
+        img {
+          width: 55px;
+        }
+      }
+    }
+    .app_title {
+      margin-left: 20px;
+      font-size: 17px;
+    }
+    .right_navigation {
+      display: flex;
+      align-items: center;
+  
+      > div {
+        display: flex;
+        align-items: center;
+        margin: 2px 10px;
+        button {
+          margin-bottom: 5px;
+        }
+        div.icon_for {
+          font-size: 12px;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+  
+  .toolbar-filler {
+    flex: 1 1 auto;
+  }
+  

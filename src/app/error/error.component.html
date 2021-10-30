@@ -1,0 +1,27 @@
+<h1 mat-dialog-title> 
+    {{data.header}}
+</h1>
+<div mat-dialog-content>
+<table>
+
+    <tr *ngFor="let errorObj of data.content">
+        <td>
+         <ul>
+             <li>
+                {{errorObj}}
+             </li>
+       
+         </ul>
+        </td>
+      </tr>
+</table>
+
+<div class="button-cls">
+  
+    <button mat-raised-button color="primary" style="margin-left: 10px;"  (click)="onOKClick()">OK</button>
+  
+  </div>
+
+   
+     
+</div>

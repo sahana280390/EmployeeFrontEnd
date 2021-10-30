@@ -1,0 +1,101 @@
+<div class="fluid-container">
+  <div class="col-xs-12">
+    <div class="top__header">
+      <div class="page__title">
+        
+          <button
+          mat-raised-button
+          color="primary"
+          (click)="retrieveEmployeeList()">
+          View Employee List
+        </button>
+     &nbsp;&nbsp;
+          <button
+          mat-raised-button
+          color="primary"
+          (click)="addEmployee()">
+          Add Employee
+        </button>
+     
+     
+    </div>
+  </div>
+</div>
+<br>
+<div class="fluid-container" *ngIf="employeeList.length > 0">
+  <div class="card_cstm">
+
+  <div class="card_body">
+
+  
+  <table class="table table-hover table-sm table-bordered">
+    <thead class="table-primary">
+      <tr>
+        <th scope="col">Employee ID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Salary</th>
+        <th scope="col">Hire Date</th>
+        <th scope="col">Manager Id</th>
+        <th scope="col">Department</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employeeList">
+        <td >{{ employee.employeeId }}</td>
+        <td>{{ employee.firstName }}</td>
+        <td>{{ employee.lastName }}</td>
+        <td>{{ employee.emailId }}</td>
+        <td>{{ employee.phoneNumber }}</td>
+        <td>{{ employee.salary | currency:'USD' }}  </td>
+        <td>{{ employee.hireDate }}</td>
+        <td>{{ employee.manager }}</td>
+        <td>{{ employee.department.departmentName }}</td>
+        <td>
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="deleteEmployee(employee.employeeId)"
+          >
+            Delete
+          </button>
+        </td>
+
+        <td>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="editEmployee(employee)"
+          >
+            Edit
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card_footer">
+  <div *ngIf="employeeList && employeeList.length > 0">
+    <div class="col-xs-12">
+      <mat-paginator
+        #paginator
+        [pageSizeOptions]="[5, 10, 15]"
+        [pageSize]="5"
+        [length]="totalElements"
+        (page)="nextPage($event)"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+</div>
+
+
+</div>
+</div>
+
+

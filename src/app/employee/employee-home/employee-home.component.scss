@@ -1,0 +1,14 @@
+
+
+
+  @mixin flexCenter {
+    display: flex;
+    align-items: center;
+  }
+  
+  .top__header {
+    @include flexCenter;
+    justify-content: space-between;
+  }
+
+  
