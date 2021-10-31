@@ -1,27 +1,26 @@
-# EmployeeApp
+# EMPLOYEEAPP-FRONTEND
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.15.
 
-## Development server
+#REQUIREMENTS
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+1. Node 11.2.15
+2. npm 6.13.4
 
-## Code scaffolding
+#VERSION DETAILS OF THE FRAMEWORKS USED
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Angular Material 11.2.15
+2. Bootstrap 4.1.3
+3. Reactive Forms  11.2.15
 
-## Build
+#STEPS TO RUN THE APPLICATION LOCALLY:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+1. git clone below mentioned repo from the github
+	https://github.com/sahana280390/EmployeeFrontEnd.git
+	
+2. Open the cmd terminal and redirect till your project location
+    Execute command: npm install
 
-## Running unit tests
+3. Once npm install command is executed successfully, run the command: ng serve for a development server.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+4. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files

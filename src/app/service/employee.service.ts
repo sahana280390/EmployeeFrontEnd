@@ -13,9 +13,8 @@ export class EmployeeService {
   constructor(private http: HttpClient) { }
 
   fetchEmployeeList(request) {
-    const endpoint = environment.apiUrl + '/employees';
     const params = request;
-    return this.http.get(endpoint, { params });
+    return this.http.get(environment.apiUrl + '/employees', { params });
   }
 
   deleteEmployee(id) {

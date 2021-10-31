@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddEditEmployeeComponent } from '../add-edit-employee/add-edit-employee.component';
 import { Department } from 'src/app/model/department';
 import { Manager } from 'src/app/model/manager';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-employee-home',
@@ -25,13 +26,13 @@ export class EmployeeHomeComponent implements OnInit {
  
   
 
-  constructor(private employeeService: EmployeeService, private dialog: MatDialog) { }
+  constructor(private employeeService: EmployeeService, private dialog: MatDialog,private notificationBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.retrieveManagerList();
-    //this.retrieveDepartmentList();
   }
 
+  /**Fetching the manager and department dropdown list */
   retrieveManagerList() {
     this.employeeService.fetchManagerList().subscribe(data => {
       this.managerList = data;
@@ -55,7 +56,7 @@ export class EmployeeHomeComponent implements OnInit {
     this.employeeService.fetchEmployeeList(request)
       .subscribe(data => {
         this.employeeList = data['content'];
-        this.employeeList = this.employeeList.sort((one, two) => (one.employeeId > two.employeeId ? -1 : 1));
+       // this.employeeList = this.employeeList.sort((one, two) => (one.employeeId > two.employeeId ? -1 : 1));
         this.totalElements = data['totalElements'];
         this.loading = false;
         this.pageSize=10;
@@ -66,13 +67,12 @@ export class EmployeeHomeComponent implements OnInit {
 
   private deleteEmployee(employeeId) {
     this.employeeService.deleteEmployee(employeeId).subscribe(response => {
-      //console.log(response);
+      this.notificationBar.open('Employee with employeeId '+ employeeId + ' is deleted successfully', 'Close');
       this.fetchEmployees({ page: "0", size: "10" });
     })
   }
 
   public addEmployee(){
-
     window.scroll(0, 0);
     const dialogRef = this.dialog.open(AddEditEmployeeComponent, {
       panelClass: 'AddEditEmployee__popup',
@@ -92,7 +92,6 @@ export class EmployeeHomeComponent implements OnInit {
 
   public editEmployee(editEmployeeDataItem){
     window.scroll(0, 0);
-   // console.log(editEmployeeDataItem);
     const dialogRef = this.dialog.open(AddEditEmployeeComponent, {
       panelClass: 'AddEditEmployee__popup',
       disableClose: true,
@@ -108,6 +107,7 @@ export class EmployeeHomeComponent implements OnInit {
    
   }
 
+  /**Paginator settings */
   nextPage(event: PageEvent) {
     const request = {};
     request['page'] = event.pageIndex.toString();

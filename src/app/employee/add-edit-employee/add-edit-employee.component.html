@@ -42,7 +42,7 @@
 
               <mat-form-field appearance="fill">
                 <mat-label>Hire Date</mat-label>
-                <input matInput [matDatepicker]="picker" [formControlName]="'hireDate'">
+                <input matInput [matDatepicker]="picker" [formControlName]="'hireDate'" required>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
@@ -69,7 +69,6 @@
               </mat-form-field>
                 
         </div>
-        {{employeeForm.get('department')}}
 
         <div class="button-cls">
           <button mat-raised-button color="primary" style="margin-left: 10px;"  (click)="onCancelClick()">Cancel</button>

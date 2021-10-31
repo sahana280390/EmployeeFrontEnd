@@ -23,7 +23,7 @@ export class AddEditEmployeeComponent implements OnInit {
     salary: new FormControl('',Validators.required),
     phoneNumber: new FormControl('',[Validators.pattern('^(1\s?)?((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$')]),
     department: new FormControl({},Validators.required),
-    hireDate: new FormControl(new Date()),
+    hireDate: new FormControl(new Date(),Validators.required),
     manager: new FormControl('',Validators.required)
   });
 
@@ -57,20 +57,16 @@ export class AddEditEmployeeComponent implements OnInit {
      if(this.data.header === 'Edit Employee'){
       this.employeeForm.reset(this.data.content);
      }
-    
-    // console.log(this.employeeForm.value);
     })
   }
 
   onOKClick(): void {
-   // console.log('hie',this.employeeForm.value);
     this.employeeObj = this.employeeForm.value;
     if(this.employeeObj.department && this.employeeObj.department.departmentId != null) {
       this.employeeService.saveEmployee(this.employeeObj).subscribe(response => {
         this.notificationBar.open('Employee Data is saved successfully', 'Close');
         this.dialogRef.close({'action': 'OK'});
       },err=> {
-       // console.log('error in the form',err.error.errors);
         if(err.error && err.error.errors && err.error.errors != null){
            const dialogRef = this.dialog.open(ErrorComponent, {
           width: '430px',
@@ -80,7 +76,6 @@ export class AddEditEmployeeComponent implements OnInit {
             this.notificationBar.open('Employee Data is not saved', 'Close');
           }
         },()=>{
-        //  this.dialogRef.close({'action': 'OK'});
         });
       
     } else {
